@@ -2,14 +2,14 @@ package com.hotel.guestservice.services.implementations;
 
 import com.hotel.guestservice.exceptions.RecordNotFoundException;
 import com.hotel.guestservice.exceptions.ServiceBusinessException;
-import com.hotel.guestservice.persistence.IGuestServicePersistence;
+import com.hotel.guestservice.persistence.GuestServicePersistence;
 import com.hotel.guestservice.persistence.model.CreditCardEntity;
 import com.hotel.guestservice.persistence.model.GuestEntity;
-import com.hotel.guestservice.services.IGuestService;
+import com.hotel.guestservice.services.GuestService;
 import com.hotel.guestservice.services.dto.GuestCompleteDetailEntity;
 import com.hotel.guestservice.services.dto.GuestServiceDomainEntity;
 import com.hotel.guestservice.services.dto.ReservationDomainEntity;
-import com.hotel.guestservice.util.convert.IConverter;
+import com.hotel.guestservice.util.convert.Converter;
 import com.hotel.guestservice.util.http.ReservationServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,20 +21,20 @@ import java.util.TreeMap;
 
 @Slf4j
 @Service
-public class GuestServiceImplementation implements IGuestService {
+public class GuestServiceImplementation implements GuestService {
 
     private final int REGULARITY=3;
     private final String LOYAL="loyal";
     private final String NOTLOYAL = "not loyal";
 
     @Autowired
-    private IGuestServicePersistence persistence;
+    private GuestServicePersistence persistence;
 
     @Autowired
     private ReservationServiceClient requestHandler;
 
     @Autowired
-   private IConverter converter;
+   private Converter converter;
 
     @Override
     public GuestCompleteDetailEntity addGuestDetails(GuestServiceDomainEntity guestServiceDomainEntity) throws Exception {
@@ -63,7 +63,7 @@ public class GuestServiceImplementation implements IGuestService {
         completeDetailEntity.setLoyalty(NOTLOYAL);
            GuestEntity guestEntity=persistence.fetchGuestDetails(name, password);
            CreditCardEntity cardEntity = persistence.fetchCreditCardDetails(name, password);
-           ReservationDomainEntity[] reservationdetails=requestHandler.getReservationDetailsForUser(name, password);
+           ReservationDomainEntity[] reservationdetails=requestHandler.getReservationDetailsForUser(name);
            if(guestEntity==null || cardEntity == null || reservationdetails[0]==null){
                throw new RecordNotFoundException("RecordNOtFound",new Exception());
            }
@@ -93,7 +93,7 @@ public class GuestServiceImplementation implements IGuestService {
         completeDetailEntity.setLoyalty(NOTLOYAL);
             GuestEntity guestEntity=persistence.fetchGuestDetails(name, password);
             CreditCardEntity cardEntity = persistence.fetchCreditCardDetails(name, password);
-            ReservationDomainEntity[] reservationdetails=requestHandler.getReservationDetailsForUser(name, password);
+            ReservationDomainEntity[] reservationdetails=requestHandler.getReservationDetailsForUser(name);
             if(guestEntity==null || cardEntity == null || reservationdetails[0]==null){
                 throw new RecordNotFoundException("RecordNOtFound",new Exception());
             }

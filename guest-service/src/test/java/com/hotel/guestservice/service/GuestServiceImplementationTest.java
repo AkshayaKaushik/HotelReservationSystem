@@ -1,19 +1,12 @@
 package com.hotel.guestservice.service;
 
-import com.hotel.guestservice.persistence.IGuestServicePersistence;
-import com.hotel.guestservice.services.IGuestService;
-
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 public class GuestServiceImplementationTest {
 
   /*  @InjectMocks
-    IGuestService service;
+    GuestService service;
 
     @Mock
-    IGuestServicePersistence persistence;
+    GuestServicePersistence persistence;
 */
   /*  @Test
     public void*/

@@ -1,9 +1,10 @@
+/*
 package com.hotel.guestservice.handlers;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hotel.guestservice.common.RoomTypes;
-import com.hotel.guestservice.services.IGuestService;
+import com.hotel.guestservice.services.GuestService;
 import com.hotel.guestservice.services.dto.GuestCompleteDetailEntity;
 import com.hotel.guestservice.services.dto.GuestServiceDomainEntity;
 
@@ -21,7 +22,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class GuestServiceHandlerTest {
 
     @MockBean
-    private IGuestService service;
+    private GuestService service;
 
     @MockBean
     private EurekaClient eurekaClient;
@@ -95,3 +95,4 @@ public class GuestServiceHandlerTest {
     }
 
 }
+*/

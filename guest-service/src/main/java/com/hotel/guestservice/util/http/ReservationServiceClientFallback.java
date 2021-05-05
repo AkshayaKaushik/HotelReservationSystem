@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ReservationServiceClientFallback implements ReservationServiceClient {
     @Override
-    public ReservationDomainEntity[] getReservationDetailsForUser(String name, String password) {
+    public ReservationDomainEntity[] getReservationDetailsForUser(String name) {
         return new ReservationDomainEntity[]{null};
     }
 }

@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@FeignClient(value = "reservationclient", url = "http://localhost:8081/")
+@FeignClient(value = "reservationclient", url = "http://localhost:2020/")
 public interface ReservationServiceClient {
 
     @RequestMapping(method = RequestMethod.GET, value = "/guest")
-    ReservationDomainEntity[] getReservationDetailsForUser(@RequestParam(name="name")String name,@RequestParam(name="password") String password);
+    ReservationDomainEntity[] getReservationDetailsForUser(@RequestParam(name="name")String name);
 }

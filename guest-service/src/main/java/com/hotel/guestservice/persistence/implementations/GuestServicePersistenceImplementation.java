@@ -1,7 +1,7 @@
 package com.hotel.guestservice.persistence.implementations;
 
 import com.hotel.guestservice.exceptions.DatabaseBusinessException;
-import com.hotel.guestservice.persistence.IGuestServicePersistence;
+import com.hotel.guestservice.persistence.GuestServicePersistence;
 import com.hotel.guestservice.persistence.model.CreditCardEntity;
 import com.hotel.guestservice.persistence.model.GuestEntity;
 import com.hotel.guestservice.persistence.repository.CreditCardRepository;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-public class GuestServicePersistenceImplementation implements IGuestServicePersistence {
+public class GuestServicePersistenceImplementation implements GuestServicePersistence {
 
     @Autowired
     private GuestRepository guestRepository;

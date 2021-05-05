@@ -1,7 +1,6 @@
 package com.hotel.guestservice.util.convert;
 
 import com.googlecode.jmapper.JMapper;
-import com.googlecode.jmapper.api.JMapperAPI;
 import com.hotel.guestservice.persistence.model.CreditCardEntity;
 import com.hotel.guestservice.persistence.model.GuestEntity;
 import com.hotel.guestservice.services.dto.GuestServiceDomainEntity;
@@ -10,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope("prototype")
-public class ConverterImplementation implements IConverter{
+public class ConverterImplementation implements Converter {
     JMapper<GuestEntity,GuestServiceDomainEntity> guestMapper;
     JMapper<CreditCardEntity,GuestServiceDomainEntity> cardMapper;
     public ConverterImplementation() {

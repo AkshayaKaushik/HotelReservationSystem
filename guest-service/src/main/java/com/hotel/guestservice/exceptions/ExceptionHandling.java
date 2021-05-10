@@ -1,8 +1,8 @@
 package com.hotel.guestservice.exceptions;
 
+import com.hotel.guestservice.common.GuestApiResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class ExceptionHandling {
 
     @ExceptionHandler(value = {RecordNotFoundException.class})
-    public ResponseEntity<Object> handleRecordNotFoundException(RecordNotFoundException ex){
+    public GuestApiResponse<String> handleRecordNotFoundException(RecordNotFoundException ex){
         log.error(ex.toString());
-        return new ResponseEntity<Object>("RECORD NOT FOUND",HttpStatus.INTERNAL_SERVER_ERROR);
+        return new GuestApiResponse<String>(HttpStatus.INTERNAL_SERVER_ERROR,"RECORD NOT FOUND",null);
     }
 
     @ExceptionHandler(value={DatabaseBusinessException.class})
-    public ResponseEntity<Object> handleDatabaseBusinessException(DatabaseBusinessException ex){
+    public GuestApiResponse<String> handleDatabaseBusinessException(DatabaseBusinessException ex){
         log.error(ex.toString());
-        return new ResponseEntity<Object>("Error while processing request in database layer:\n "+ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        return new GuestApiResponse<String>(HttpStatus.INTERNAL_SERVER_ERROR,"Error while processing request in database layer:\n "+ex.getLocalizedMessage(),null);
     }
 
     @ExceptionHandler(value ={ServiceBusinessException.class})
-    public ResponseEntity<Object> handleServiceBusinessException(ServiceBusinessException ex){
+    public GuestApiResponse<String> handleServiceBusinessException(ServiceBusinessException ex){
         log.error(ex.toString());
-        return new ResponseEntity<Object>("Error while processing request in service layer:\n "+ex.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        return new GuestApiResponse<String>(HttpStatus.INTERNAL_SERVER_ERROR,"Error while processing request in service layer:\n "+ex.getLocalizedMessage(),null);
     }
 
     @ExceptionHandler(value = {Exception.class})
-    public ResponseEntity<Object> handleException(Exception ex){
+    public GuestApiResponse<String> handleException(Exception ex){
         log.error(ex.toString());
-        return new ResponseEntity<Object>(ex.getLocalizedMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new GuestApiResponse<String>(HttpStatus.INTERNAL_SERVER_ERROR,ex.getLocalizedMessage(), null);
     }
 }

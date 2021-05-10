@@ -4,6 +4,7 @@ import com.koushik.reservation.configuration.kafka.KafkaConfiguration;
 import com.koushik.reservation.model.ReservationGuestDetails;
 import com.koushik.reservation.model.ReservationPaymentDetails;
 import com.koushik.reservation.utilities.Converter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class ReservationService implements IReservationService {
 
 	@Autowired
@@ -42,6 +44,7 @@ public class ReservationService implements IReservationService {
 		System.out.println(reservationDetails.toString());
 		ReservationPaymentDetails reservationPaymentDetails = new ReservationDetailsUtility().convertHotelToPaymentDetails(reservationDetailsDto);
 		config.sendMessage(reservationPaymentDetails);
+		log.info("Message sen t to the kafka topic "+reservationPaymentDetails);
 		return reservationRepository.save(reservationDetails);
 	}
 

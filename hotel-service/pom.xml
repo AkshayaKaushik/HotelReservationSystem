@@ -15,7 +15,7 @@
 	<name>hotelservice</name>
 	<description>Hotel service microservice is to maintain and interact on thehotels and there details</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<!--java.version>1.8</java.version-->
 		<spring-cloud.version>2020.0.2</spring-cloud.version>
 	</properties>
 	<dependencies>

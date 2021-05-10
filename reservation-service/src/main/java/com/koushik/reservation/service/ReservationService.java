@@ -1,6 +1,8 @@
 package com.koushik.reservation.service;
 
+import com.koushik.reservation.configuration.kafka.KafkaConfiguration;
 import com.koushik.reservation.model.ReservationGuestDetails;
+import com.koushik.reservation.model.ReservationPaymentDetails;
 import com.koushik.reservation.utilities.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class ReservationService implements IReservationService {
 	@Autowired
 	IFeignClientConfig client;
 
+	@Autowired
+	KafkaConfiguration config;
+
 	@Override
 	public ReservationDetails bookHotelWithDetails(ReservationDetailsDto reservationDetailsDto) {
 		ReservationDetails reservationDetails = new ReservationDetailsUtility().convert(reservationDetailsDto);
@@ -35,6 +40,8 @@ public class ReservationService implements IReservationService {
 				.filter(r -> reservationDetailsDto.getRoomType().equals(r.getRoomtypes())).findAny().orElse(null)
 				.getPrice()) * reservationDetailsDto.getNumberofDays());
 		System.out.println(reservationDetails.toString());
+		ReservationPaymentDetails reservationPaymentDetails = new ReservationDetailsUtility().convertHotelToPaymentDetails(reservationDetailsDto);
+		config.sendMessage(reservationPaymentDetails);
 		return reservationRepository.save(reservationDetails);
 	}
 
